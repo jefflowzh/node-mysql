@@ -1,4 +1,4 @@
-const { database } = require('../config/env');
+const { env } = require('../config/env');
 const mysql = require('mysql2/promise');
 const Sequelize = require("sequelize");
 
@@ -7,15 +7,15 @@ module.exports = db = {};
 module.exports.initializeDb = async function () {
   // create db if it doesn't already exist
   const connection = await mysql.createConnection({
-    host: database.host,
-    port: database.port,
-    user: database.username,
-    password: database.password
+    host: env.db.host,
+    port: env.db.port,
+    user: env.db.username,
+    password: env.db.password
   });
-  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database.name}\`;`);
+  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${env.db.name}\`;`);
 
-  const sequelize = new Sequelize(database.name, database.username, database.password, {
-    host: database.host,
+  const sequelize = new Sequelize(env.db.name, env.db.username, env.db.password, {
+    host: env.db.host,
     dialect: 'mysql',
     pool: {
       max: 400,

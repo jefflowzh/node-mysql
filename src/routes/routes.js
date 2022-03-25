@@ -1,7 +1,10 @@
-module.exports = app => {
-  const userController = require("../controllers/UserController.js");
+const userController = require("../controllers/UserController.js");
+const authController = require("../controllers/AuthController.js");
 
+module.exports = app => {
   var router = require("express").Router();
+
+  // TODO: Implement jwt validation middleware for routes
 
   // Create a new user
   router.post("/users", userController.create);
@@ -20,6 +23,9 @@ module.exports = app => {
 
   // // Delete all users
   // router.delete("/users", users.deleteAll);
+
+  // Login new user
+  router.post("/auth/login", authController.login);
 
   app.use('/api', router);
 };

@@ -1,4 +1,4 @@
-const { api } = require('./config/env');
+const { env } = require('./config/env');
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 require("./routes/routes")(app);
 
 // set port, listen for requests
-const PORT = api.port || 8080;
+const PORT = env.api.port || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
