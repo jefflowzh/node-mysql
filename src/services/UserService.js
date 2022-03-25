@@ -14,7 +14,11 @@ exports.create = async (name, email, password) => {
       email: email,
       hashedPassword: hashedPassword,
     });
-    return newUser;
+    return {
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+    };
   } catch (err) {
     console.log(err.message);
     throw err;
